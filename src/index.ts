@@ -22,7 +22,9 @@ app.post("/devices/reboot", async (req, res) => {
 
   await commander
     .reboot(devices)
-    .then(() => res.sendStatus(200))
+    .then((devicesResult) =>
+      res.sendStatus(200).json({ devices: devicesResult })
+    )
     .catch(() => res.sendStatus(500));
 });
 
@@ -31,7 +33,9 @@ app.post("/devices/shutdown", async (req, res) => {
 
   await commander
     .shutdown(devices)
-    .then(() => res.sendStatus(200))
+    .then((devicesResult) =>
+      res.sendStatus(200).json({ devices: devicesResult })
+    )
     .catch(() => res.sendStatus(500));
 });
 
@@ -40,9 +44,9 @@ app.post("/devices/enable-protection", async (req, res) => {
 
   await commander
     .enableProtection(devices)
-    .then((devicesResult) => {
-      res.sendStatus(200).json({ devices: devicesResult });
-    })
+    .then((devicesResult) =>
+      res.sendStatus(200).json({ devices: devicesResult })
+    )
     .catch(() => res.sendStatus(500));
 });
 
@@ -51,9 +55,9 @@ app.post("/devices/disable-protection", async (req, res) => {
 
   await commander
     .disableProtection(devices)
-    .then((devicesResult) => {
-      res.sendStatus(200).json({ devices: devicesResult });
-    })
+    .then((devicesResult) =>
+      res.sendStatus(200).json({ devices: devicesResult })
+    )
     .catch(() => res.sendStatus(500));
 });
 
@@ -62,9 +66,9 @@ app.post("/devices/ping", async (req, res) => {
 
   await commander
     .getDevicesPingStatus(devices)
-    .then((devicesResult) => {
-      res.sendStatus(200).json({ devices: devicesResult });
-    })
+    .then((devicesResult) =>
+      res.sendStatus(200).json({ devices: devicesResult })
+    )
     .catch(() => res.sendStatus(500));
 });
 
@@ -73,9 +77,9 @@ app.post("/devices/protection-status", async (req, res) => {
 
   await commander
     .getDevicesProtectionStatus(devices)
-    .then((devicesResult) => {
-      res.sendStatus(200).json({ devices: devicesResult });
-    })
+    .then((devicesResult) =>
+      res.sendStatus(200).json({ devices: devicesResult })
+    )
     .catch(() => res.sendStatus(500));
 });
 

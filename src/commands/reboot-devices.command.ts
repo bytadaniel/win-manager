@@ -1,14 +1,27 @@
-import { Device } from "../interface";
+import { Device, DeviceCommandResult } from "../interface";
 
 export class RebootDevicesCommand {
-  public async execute(devices: Device[]): Promise<void> {
+  public async execute(
+    devices: Device[]
+  ): Promise<PromiseSettledResult<DeviceCommandResult>[]> {
     const requests = devices.map(async (device) => {
-      const response = await fetch(`${device.ip}:${device.port}/reboot`);
-      if (!response.ok) {
-        throw new Error(await response.text());
+      try {
+        const response = await fetch(
+          `${device.ip}:${device.port}/device/reboot`,
+          { signal: AbortSignal.timeout(10000) }
+        );
+
+        if (!response.ok) {
+          return { ...device, success: false, error: await response.text() };
+        } else {
+          return { ...device, success: true, data: await response.json() };
+        }
+      } catch (error) {
+        const err = error as Error;
+        return { ...device, success: false, error: err.message };
       }
     });
 
-    await Promise.allSettled(requests);
+    return Promise.allSettled(requests);
   }
 }
