@@ -46,4 +46,37 @@ app.post("/devices/enable-protection", async (req, res) => {
     .catch(() => res.sendStatus(500));
 });
 
+app.post("/devices/disable-protection", async (req, res) => {
+  const devices: Device[] = req.body.devices;
+
+  await commander
+    .disableProtection(devices)
+    .then((devicesResult) => {
+      res.sendStatus(200).json({ devices: devicesResult });
+    })
+    .catch(() => res.sendStatus(500));
+});
+
+app.post("/devices/ping", async (req, res) => {
+  const devices: Device[] = req.body.devices;
+
+  await commander
+    .getDevicesPingStatus(devices)
+    .then((devicesResult) => {
+      res.sendStatus(200).json({ devices: devicesResult });
+    })
+    .catch(() => res.sendStatus(500));
+});
+
+app.post("/devices/protection-status", async (req, res) => {
+  const devices: Device[] = req.body.devices;
+
+  await commander
+    .getDevicesProtectionStatus(devices)
+    .then((devicesResult) => {
+      res.sendStatus(200).json({ devices: devicesResult });
+    })
+    .catch(() => res.sendStatus(500));
+});
+
 app.listen(PORT, () => console.log("Start server on port", PORT));
