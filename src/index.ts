@@ -22,7 +22,9 @@ app.post("/devices/reboot", async (req, res) => {
 
   await commander
     .reboot(devices)
-    .then(() => res.sendStatus(200))
+    .then((devicesResult) =>
+      res.sendStatus(200).json({ devices: devicesResult })
+    )
     .catch(() => res.sendStatus(500));
 });
 
@@ -31,7 +33,53 @@ app.post("/devices/shutdown", async (req, res) => {
 
   await commander
     .shutdown(devices)
-    .then(() => res.sendStatus(200))
+    .then((devicesResult) =>
+      res.sendStatus(200).json({ devices: devicesResult })
+    )
+    .catch(() => res.sendStatus(500));
+});
+
+app.post("/devices/enable-protection", async (req, res) => {
+  const devices: Device[] = req.body.devices;
+
+  await commander
+    .enableProtection(devices)
+    .then((devicesResult) =>
+      res.sendStatus(200).json({ devices: devicesResult })
+    )
+    .catch(() => res.sendStatus(500));
+});
+
+app.post("/devices/disable-protection", async (req, res) => {
+  const devices: Device[] = req.body.devices;
+
+  await commander
+    .disableProtection(devices)
+    .then((devicesResult) =>
+      res.sendStatus(200).json({ devices: devicesResult })
+    )
+    .catch(() => res.sendStatus(500));
+});
+
+app.post("/devices/ping", async (req, res) => {
+  const devices: Device[] = req.body.devices;
+
+  await commander
+    .getDevicesPingStatus(devices)
+    .then((devicesResult) =>
+      res.sendStatus(200).json({ devices: devicesResult })
+    )
+    .catch(() => res.sendStatus(500));
+});
+
+app.post("/devices/protection-status", async (req, res) => {
+  const devices: Device[] = req.body.devices;
+
+  await commander
+    .getDevicesProtectionStatus(devices)
+    .then((devicesResult) =>
+      res.sendStatus(200).json({ devices: devicesResult })
+    )
     .catch(() => res.sendStatus(500));
 });
 
