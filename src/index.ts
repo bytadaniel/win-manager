@@ -35,4 +35,15 @@ app.post("/devices/shutdown", async (req, res) => {
     .catch(() => res.sendStatus(500));
 });
 
+app.post("/devices/enable-protection", async (req, res) => {
+  const devices: Device[] = req.body.devices;
+
+  await commander
+    .enableProtection(devices)
+    .then((devicesResult) => {
+      res.sendStatus(200).json({ devices: devicesResult });
+    })
+    .catch(() => res.sendStatus(500));
+});
+
 app.listen(PORT, () => console.log("Start server on port", PORT));
