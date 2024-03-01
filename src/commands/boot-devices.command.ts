@@ -5,24 +5,26 @@ export class BootDevicesCommand {
   public async execute(devices: Device[]): Promise<DeviceCommandResult[]> {
     const results: DeviceCommandResult[] = [];
 
-    for (const { macAddress, ip, port } of devices) {
+    for (const { mac, ip, port } of devices) {
       await wol
-        .wake(macAddress)
+        .wake(mac)
         .then(() => {
-          console.log(macAddress, "wol success");
+          console.log(mac, "wol success");
           results.push({
             success: true,
             data: {},
           });
         })
         .catch((wakeOnLanError) => {
-          console.log(macAddress, "wol error", wakeOnLanError);
+          console.log(mac, "wol error", wakeOnLanError);
           results.push({
             success: true,
             data: {},
           });
         });
     }
+
+    console.log({ results });
 
     return results;
   }

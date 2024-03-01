@@ -1,6 +1,6 @@
 export interface Device {
-  macAddress: string;
   ip: string;
+  mac: string;
   port: number;
 }
 
