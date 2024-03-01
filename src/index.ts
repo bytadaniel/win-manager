@@ -2,7 +2,7 @@ import express from "express";
 import { Commander } from "./commander";
 import { Device } from "./interface";
 
-const PORT = process.env.PORT || 8083;
+const PORT = process.env.PORT || 8082;
 const app = express();
 const commander = new Commander();
 
