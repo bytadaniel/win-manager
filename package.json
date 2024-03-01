@@ -6,7 +6,7 @@
   "main": "build/index.js",
   "scripts": {
     "build": "npx tsc -d",
-    "pkg:win": "npm run build && pkg . -t node18-win --out-path=output",
+    "pkg:win": "npm run build && pkg . -t node12-win --out-path=output",
     "pkg:osx": "npm run build && pkg . -t node18-osx --out-path=output",
     "start": "node build/index.js"
   },
