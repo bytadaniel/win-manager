@@ -4,7 +4,7 @@ export interface Device {
   port: number;
 }
 
-export type DeviceCommandResult = {
+export type DeviceCommandResult = Device & {
   success: boolean;
   error?: string;
   data?: Record<string, unknown>;

@@ -20,16 +20,16 @@ export class Commander {
   private readonly getDevicesProtectionStatusCommand =
     new GetDevicesProtectionStatusCommand();
 
-  public async boot(devices: Device[]): Promise<void> {
-    await this.bootDevicesCommand.execute(devices);
+  public async boot(devices: Device[]): Promise<DeviceCommandResult[]> {
+    return this.bootDevicesCommand.execute(devices);
   }
 
-  public async reboot(devices: Device[]): Promise<void> {
-    await this.rebootDevicesCommand.execute(devices);
+  public async reboot(devices: Device[]): Promise<DeviceCommandResult[]> {
+    return this.rebootDevicesCommand.execute(devices);
   }
 
-  public async shutdown(devices: Device[]): Promise<void> {
-    await this.shutdownDevicesCommand.execute(devices);
+  public async shutdown(devices: Device[]): Promise<DeviceCommandResult[]> {
+    return this.shutdownDevicesCommand.execute(devices);
   }
 
   public async enableProtection(
