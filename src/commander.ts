@@ -34,25 +34,25 @@ export class Commander {
 
   public async enableProtection(
     devices: Device[]
-  ): Promise<PromiseSettledResult<DeviceCommandResult>[]> {
+  ): Promise<DeviceCommandResult[]> {
     return this.enableProtectionDevicesCommand.execute(devices);
   }
 
   public async disableProtection(
     devices: Device[]
-  ): Promise<PromiseSettledResult<DeviceCommandResult>[]> {
+  ): Promise<DeviceCommandResult[]> {
     return this.disableProtectionDevicesCommand.execute(devices);
   }
 
   public async getDevicesPingStatus(
     devices: Device[]
-  ): Promise<PromiseSettledResult<DeviceCommandResult>[]> {
+  ): Promise<DeviceCommandResult[]> {
     return this.getDevicesPingStatusCommand.execute(devices);
   }
 
   public async getDevicesProtectionStatus(
     devices: Device[]
-  ): Promise<PromiseSettledResult<DeviceCommandResult>[]> {
+  ): Promise<DeviceCommandResult[]> {
     return this.getDevicesProtectionStatusCommand.execute(devices);
   }
 }

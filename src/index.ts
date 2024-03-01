@@ -8,13 +8,15 @@ const commander = new Commander();
 
 app.use(express.json());
 
+app.use((req, res, next) => next(console.log(new Date(), req.method, req.url)));
+
 app.post("/devices/boot", async (req, res) => {
   const devices: Device[] = req.body.devices;
 
   await commander
     .boot(devices)
-    .then(() => res.sendStatus(200))
-    .catch(() => res.sendStatus(500));
+    .then((devices) => res.status(200).json({ devices }))
+    .catch((error) => res.status(500).send(error));
 });
 
 app.post("/devices/reboot", async (req, res) => {
@@ -22,10 +24,8 @@ app.post("/devices/reboot", async (req, res) => {
 
   await commander
     .reboot(devices)
-    .then((devicesResult) =>
-      res.sendStatus(200).json({ devices: devicesResult })
-    )
-    .catch(() => res.sendStatus(500));
+    .then((devices) => res.status(200).json({ devices }))
+    .catch((error) => res.status(500).send(error));
 });
 
 app.post("/devices/shutdown", async (req, res) => {
@@ -33,10 +33,8 @@ app.post("/devices/shutdown", async (req, res) => {
 
   await commander
     .shutdown(devices)
-    .then((devicesResult) =>
-      res.sendStatus(200).json({ devices: devicesResult })
-    )
-    .catch(() => res.sendStatus(500));
+    .then((devices) => res.status(200).json({ devices }))
+    .catch((error) => res.status(500).send(error));
 });
 
 app.post("/devices/enable-protection", async (req, res) => {
@@ -44,10 +42,8 @@ app.post("/devices/enable-protection", async (req, res) => {
 
   await commander
     .enableProtection(devices)
-    .then((devicesResult) =>
-      res.sendStatus(200).json({ devices: devicesResult })
-    )
-    .catch(() => res.sendStatus(500));
+    .then((devices) => res.status(200).json({ devices }))
+    .catch((error) => res.status(500).send(error));
 });
 
 app.post("/devices/disable-protection", async (req, res) => {
@@ -55,10 +51,8 @@ app.post("/devices/disable-protection", async (req, res) => {
 
   await commander
     .disableProtection(devices)
-    .then((devicesResult) =>
-      res.sendStatus(200).json({ devices: devicesResult })
-    )
-    .catch(() => res.sendStatus(500));
+    .then((devices) => res.status(200).json({ devices }))
+    .catch((error) => res.status(500).send(error));
 });
 
 app.post("/devices/ping", async (req, res) => {
@@ -66,10 +60,8 @@ app.post("/devices/ping", async (req, res) => {
 
   await commander
     .getDevicesPingStatus(devices)
-    .then((devicesResult) =>
-      res.sendStatus(200).json({ devices: devicesResult })
-    )
-    .catch(() => res.sendStatus(500));
+    .then((devices) => res.status(200).json({ devices }))
+    .catch((error) => res.status(500).send(error));
 });
 
 app.post("/devices/protection-status", async (req, res) => {
@@ -77,10 +69,8 @@ app.post("/devices/protection-status", async (req, res) => {
 
   await commander
     .getDevicesProtectionStatus(devices)
-    .then((devicesResult) =>
-      res.sendStatus(200).json({ devices: devicesResult })
-    )
-    .catch(() => res.sendStatus(500));
+    .then((devices) => res.status(200).json({ devices }))
+    .catch((error) => res.status(500).send(error));
 });
 
 app.listen(PORT, () => console.log("Start server on port", PORT));
