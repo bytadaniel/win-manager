@@ -15,7 +15,10 @@ app.post("/devices/boot", async (req, res) => {
 
   await commander
     .boot(devices)
-    .then((devices) => res.status(200).json({ devices }))
+    .then((devices) => {
+      console.log({ devices });
+      res.status(200).json({ devices })
+    })
     .catch((error) => res.status(500).send(error));
 });
 
@@ -24,7 +27,10 @@ app.post("/devices/reboot", async (req, res) => {
 
   await commander
     .reboot(devices)
-    .then((devices) => res.status(200).json({ devices }))
+    .then((devices) => {
+      console.log({ devices });
+      res.status(200).json({ devices })
+    })
     .catch((error) => res.status(500).send(error));
 });
 
@@ -33,7 +39,10 @@ app.post("/devices/shutdown", async (req, res) => {
 
   await commander
     .shutdown(devices)
-    .then((devices) => res.status(200).json({ devices }))
+    .then((devices) => {
+      console.log({ devices });
+      res.status(200).json({ devices })
+    })
     .catch((error) => res.status(500).send(error));
 });
 
@@ -42,7 +51,10 @@ app.post("/devices/enable-protection", async (req, res) => {
 
   await commander
     .enableProtection(devices)
-    .then((devices) => res.status(200).json({ devices }))
+    .then((devices) => {
+      console.log({ devices });
+      res.status(200).json({ devices })
+    })
     .catch((error) => res.status(500).send(error));
 });
 
@@ -51,7 +63,10 @@ app.post("/devices/disable-protection", async (req, res) => {
 
   await commander
     .disableProtection(devices)
-    .then((devices) => res.status(200).json({ devices }))
+    .then((devices) => {
+      console.log({ devices });
+      res.status(200).json({ devices })
+    })
     .catch((error) => res.status(500).send(error));
 });
 
@@ -60,7 +75,10 @@ app.post("/devices/ping", async (req, res) => {
 
   await commander
     .getDevicesPingStatus(devices)
-    .then((devices) => res.status(200).json({ devices }))
+    .then((devices) => {
+      console.log({ devices });
+      res.status(200).json({ devices })
+    })
     .catch((error) => res.status(500).send(error));
 });
 
@@ -69,7 +87,10 @@ app.post("/devices/protection-status", async (req, res) => {
 
   await commander
     .getDevicesProtectionStatus(devices)
-    .then((devices) => res.status(200).json({ devices }))
+    .then((devices) => {
+      console.log({ devices });
+      res.status(200).json({ devices })
+    })
     .catch((error) => res.status(500).send(error));
 });
 
