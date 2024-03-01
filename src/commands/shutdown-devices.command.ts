@@ -12,6 +12,7 @@ export class ShutdownDevicesCommand {
     );
 
     const results = await Promise.all(requests);
+
     console.log({
       results,
     });
