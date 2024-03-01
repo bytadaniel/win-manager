@@ -3,10 +3,13 @@ import { Device } from "../interface";
 
 export class BootDevicesCommand {
   public async execute(devices: Device[]): Promise<void> {
-    await Promise.allSettled(
-      devices.map(({ macAddress, ip, port }) =>
-        wol.wake(macAddress, { address: ip, port })
-      )
-    );
+    for (const { macAddress, ip, port } of devices) {
+      await wol
+        .wake(macAddress, { address: ip, port })
+        .catch((wakeOnLanError) => {
+          console.log(wakeOnLanError);
+          throw wakeOnLanError;
+        });
+    }
   }
 }
