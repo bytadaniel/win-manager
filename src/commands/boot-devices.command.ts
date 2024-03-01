@@ -26,8 +26,6 @@ export class BootDevicesCommand {
         });
     }
 
-    console.log({ results });
-
     return results;
   }
 }
